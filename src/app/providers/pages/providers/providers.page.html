@@ -1,0 +1,65 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onToggleMenu()">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      Proveedores
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="success" fill="solid" shape="round" (click)="presentModal()">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Agregar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-grid>
+          <ion-row> <!-- Encabezados -->
+            <ion-col size="3" class="ion-text-center"><h6> Nombre </h6></ion-col>
+            <ion-col size="2" class="ion-text-center"><h6> Compañia </h6></ion-col>
+            <ion-col size="1" class="ion-text-center"><h6> Categoría </h6></ion-col>
+            <ion-col size="2" class="ion-text-center"><h6> Celular </h6></ion-col>
+            <ion-col size="2" class="ion-text-center"><h6> Correo </h6></ion-col>
+          </ion-row> <!-- Fin de los encabezados-->
+          <ion-row *ngFor="let provider of allProviders"> <!-- Fila a repetir -->
+            <ion-col size="3" class="ion-text-center">
+              <p>{{ provider.nameProvider }}</p>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+              <p>{{ provider.nameCompany }}</p>
+            </ion-col>
+            <ion-col size="1" class="ion-text-center">
+              <p>{{ provider.category }}</p>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+              <p>{{ provider.telephone }}</p>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+              <p>{{ provider.email }}</p>
+            </ion-col>
+            <ion-col size="2">
+              <ion-button color="danger" class="ion-margin-end" (click)="onDelete( provider.id )">
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+              </ion-button>
+
+              <ion-button color="success" (click)="presentModalProps( provider )">
+                <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+
+          </ion-row> <!-- Fin de la fila a repetir-->
+        </ion-grid>
+      </ion-col> <!-- Fin de la columna de 9-->
+    </ion-row> <!-- Fin de la fila principal -->
+  </ion-grid>
+
+</ion-content>

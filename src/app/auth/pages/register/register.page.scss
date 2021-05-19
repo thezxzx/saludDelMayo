@@ -1,0 +1,26 @@
+.main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.no-border {
+    --border-style: none;
+    --color: #3880ff;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.error {
+    --border-style: none;
+    color: red;
+}

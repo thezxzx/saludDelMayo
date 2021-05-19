@@ -1,0 +1,43 @@
+<div>
+  <form (ngSubmit)="onAddProvider()" [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Nombre Proveedor<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="text" formControlName="nameProvider"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating">Nombre compañia<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="text" formControlName="nameCompany"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-select placeholder="Categoría" interface="popover" formControlName="category">
+          <ion-select-option [value]="item.name" *ngFor="let item of categorias">{{ item.name }}</ion-select-option>
+      </ion-select>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Celular<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="tel" formControlName="telephone"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Correo<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <div *ngIf="!name">
+        <ion-button type="submit" color="success" expand="block" fill="outline" shape="round" class="ion-margin-top">
+          Añadir
+        </ion-button>
+      </div>
+
+      <div *ngIf="name">
+        <ion-button (click)="onUpdate()" color="success" expand="block" fill="outline" shape="round" class="ion-margin-top">
+          Actualiar
+        </ion-button>
+      </div>
+    </ion-list>
+  </form>
+</div>
