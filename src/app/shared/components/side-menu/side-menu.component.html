@@ -3,43 +3,36 @@
             menuId="first"
             contentId="main">
     <ion-header>
-      <ion-toolbar color="primary">
+      <ion-toolbar color="menu">
         <ion-title>Menú</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
+        <!-- Opción de inicio -->
         <ion-item routerLink="/home">
           <ion-icon slot="start" name="home-outline"></ion-icon>
           <ion-label>Inicio</ion-label>
         </ion-item>
+        <!-- Opciónd e ventas -->
         <ion-item routerLink="/sale">
           <ion-icon slot="start" name="cash-outline"></ion-icon>
           <ion-label>Ventas</ion-label>
         </ion-item>
+        <!-- Opción de productos -->
         <ion-item routerLink="/products">
           <ion-icon slot="start" name="cart-outline"></ion-icon>
           <ion-label>Productos</ion-label>
         </ion-item>
-
-        <ion-item routerLink="">
-          <ion-icon slot="start" name="newspaper-outline"></ion-icon>
-          <ion-label>Reportes</ion-label>
-        </ion-item>
-        
+        <!-- Opciónde usuarios ( solo administrador ) -->
         <ion-item *ngIf="userRole === 'Administrador'" routerLink="/users">
           <ion-icon slot="start" name="person-outline"></ion-icon>
           <ion-label>Usuarios</ion-label>
         </ion-item>
-
+        <!-- Opción de proveedores ( solo administador ) -->
         <ion-item *ngIf="userRole === 'Administrador'" routerLink="/providers">
           <ion-icon slot="start" name="person-outline"></ion-icon>
           <ion-label>Proveedores</ion-label>
-        </ion-item>
-
-        <ion-item routerLink="">
-          <ion-icon slot="start" name="person-outline"></ion-icon>
-          <ion-label>Otros recursos</ion-label>
         </ion-item>
   
         <ion-item-divider></ion-item-divider>

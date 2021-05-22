@@ -13,6 +13,7 @@ export class SalePage implements OnInit {
 
   search: string = '';
   allProducts: Products[] = [];
+  
   constructor(
     private menu: MenuController,
     private saleService: SaleService,

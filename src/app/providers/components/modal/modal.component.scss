@@ -2,3 +2,8 @@ div {
     display: flex;
     justify-content: center;
 }
+
+.error {
+    --border-style: none;
+    color: red;
+}
