@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
-import { User } from '../../../auth/interface/user-interface';
 
 @Component({
   selector: 'app-side-menu',
@@ -8,6 +7,8 @@ import { User } from '../../../auth/interface/user-interface';
   styleUrls: ['./side-menu.component.scss'],
 })
 export class SideMenuComponent implements OnInit {
+
+  darkMode: boolean = true;
 
   user: string = '';
   userRole: string = '';
@@ -23,7 +24,18 @@ export class SideMenuComponent implements OnInit {
         }
       });
     }
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    this.darkMode = prefersDark.matches;
+
+  } // Constructor
+
+  // Activar / desactivar tema oscuro
+  toggleDarkTheme() {
+    this.darkMode = !this.darkMode;
+    document.body.classList.toggle('dark');
   }
+
   ngOnInit() {}
 
   onLogOut() {
