@@ -3,8 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductsService } from '../../services/products.service';
 import { Observable } from 'rxjs';
 import { Products } from '../../interface/products-interface';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { ValidatorService } from '../../../auth/services/validator.service';
+import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-products',
@@ -35,7 +36,8 @@ export class ProductsPage implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private productsService: ProductsService,
               private menu: MenuController,
-              private validatorService: ValidatorService ) {
+              private validatorService: ValidatorService,
+              private modalCtrl: ModalController ) {
                 this.products = this.productsService.getAllProducts();
                 this.products
                 .subscribe( products => {
@@ -53,6 +55,7 @@ export class ProductsPage implements OnInit {
 
               }
               
+  // Campos del formulario
   form: FormGroup = this.formBuilder.group({
     name: [ '', [ Validators.required ] ],
     barCode: [ '', [ Validators.required, Validators.minLength( 3 ) ] ],
@@ -123,6 +126,7 @@ export class ProductsPage implements OnInit {
     this.isUpdating = false;
   }
 
+  // Actualizar producto
   onUpdate() {
 
     // Obtener todos los valores del formulario y agregar la propiedad del id
@@ -133,5 +137,15 @@ export class ProductsPage implements OnInit {
     this.productsService.updateProduct( product );
     this.isUpdating = false;
     this.form.reset();
+  }
+
+  // Barra de busquedas
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: SearchBarComponent,
+      cssClass: 'modal'
+    });
+
+    return await modal.present();
   }
 }

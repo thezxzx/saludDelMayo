@@ -18,7 +18,9 @@ import { firebaseConfig } from 'src/environments/environment';
 import { ComponentsModule } from './providers/components/components.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   entryComponents: [],
   imports: [
     BrowserModule,

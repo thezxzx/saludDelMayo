@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Products } from 'src/app/products/interface/products-interface';
+import { Products } from '../interface/products-interface';
 
 @Pipe({
   name: 'productFilter'
@@ -11,7 +11,6 @@ export class ProductFilterPipe implements PipeTransform {
       return;
     }
     
-
     searchProduct = searchProduct.toLowerCase();
 
     return allProducts.filter( item => {

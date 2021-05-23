@@ -1,0 +1,13 @@
+<ion-searchbar
+  placeholder="buscar"
+  animated
+  debounce="500"
+  (ionChange)="onSearchProduct( $event )"
+  >
+</ion-searchbar>
+
+<ion-list>
+  <ion-item *ngFor="let product of allProducts">
+    <ion-label>{{ product.name }}</ion-label>
+  </ion-item>
+</ion-list>

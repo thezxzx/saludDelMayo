@@ -38,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'providers',
+    redirectTo: 'products',
     pathMatch: 'full'
   }
 ];

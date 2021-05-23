@@ -49,24 +49,6 @@
           </ion-row> <!-- Fin de la fila a repetir-->
         </ion-grid>
       </ion-col> <!-- Fin de la columna de 9-->
-      <ion-col size="3"> <!-- Columna de la barra de búsqueda-->
-        <ion-searchbar
-          placeholder="buscar"
-          animated
-          debounce="500"
-          (ionChange)="onSearchProduct( $event )"
-          >
-        </ion-searchbar>
-        <ion-list>
-          <ion-item *ngFor="let product of allProducts | productFilter: search">
-            <ion-label>{{ product.name }}</ion-label>
-          </ion-item>
-        </ion-list>
-          <!-- <ion-list *ngIf="isItemAvailable">
-            <ion-item *ngFor="let producto of productosFiltrados"> {{ producto.nombre }} </ion-item>
-          </ion-list> -->
-          
-      </ion-col> <!-- Fin de la columna de la barra de búsqueda-->
     </ion-row> <!-- Fin de la fila principal -->
   </ion-grid>
 </ion-content>

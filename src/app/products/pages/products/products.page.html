@@ -5,7 +5,13 @@
         <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Productos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentModal()">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Buscar
+      </ion-button>
+    </ion-buttons>
+    <!-- <ion-title>Productos</ion-title> -->
   </ion-toolbar>
 </ion-header>
 
