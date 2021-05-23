@@ -28,22 +28,27 @@
               <ion-col size="2" class="ion-text-center"><h6>Categoría</h6></ion-col>
               <!-- <ion-col size="2" class="ion-text-center"><h6>Proveedor</h6></ion-col> -->
             </ion-row> <!-- Fin de los encabezados-->
-            <ion-row *ngFor="let product of allProducts" class="row-product"> <!-- Fila a repetir -->
-              <ion-col size="2" class="ion-text-center">{{ product.barCode }}</ion-col>
-              <ion-col size="2" class="ion-text-center">{{ product.name }}</ion-col>
-              <ion-col size="2" class="ion-text-center">{{ product.unitPrice }}</ion-col>
-              <ion-col size="2" class="ion-text-center">{{ product.stock }}</ion-col>
-              <ion-col size="2" class="ion-text-center">{{ product.category }}</ion-col>
-              <!-- <ion-col size="2" class="ion-text-center">{{ product.provider }}</ion-col> -->
-              <ion-col size="2">
-                <ion-button (click)="fillFormToUpdate( product )">
-                  <ion-icon slot="icon-only" name="sync-outline"></ion-icon>
-                </ion-button>
-                <ion-button color="danger" (click)="onDelete( product.id )">
-                  <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-                </ion-button>
-              </ion-col>
-            </ion-row> <!-- Fin de la fila a repetir-->
+
+            <div class="scroll">
+              <ion-row *ngFor="let product of allProducts" class="row-product"> <!-- Fila a repetir -->
+                
+                <ion-col size="2" class="ion-text-center">{{ product.barCode }}</ion-col>
+                <ion-col size="2" class="ion-text-center">{{ product.name }}</ion-col>
+                <ion-col size="2" class="ion-text-center">{{ product.unitPrice }}</ion-col>
+                <ion-col size="2" class="ion-text-center">{{ product.stock }}</ion-col>
+                <ion-col size="2" class="ion-text-center">{{ product.category }}</ion-col>
+                <!-- <ion-col size="2" class="ion-text-center">{{ product.provider }}</ion-col> -->
+                <ion-col size="2">
+                  <ion-button (click)="fillFormToUpdate( product )">
+                    <ion-icon slot="icon-only" name="sync-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button color="danger" (click)="onDelete( product.id )">
+                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row> <!-- Fin de la fila a repetir-->
+            </div>
+
           </ion-grid>
         </ion-col> <!-- Fin de la columna de 8-->
         <ion-col size="4"> <!-- Columna del formulario-->

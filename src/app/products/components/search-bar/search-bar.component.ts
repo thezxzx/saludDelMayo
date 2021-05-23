@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Products } from '../../interface/products-interface';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -12,12 +13,20 @@ export class SearchBarComponent implements OnInit {
   
   allProducts: Products[] = [];
 
-  constructor() { }
+  constructor( private productsService: ProductsService ) {
+    productsService.getAllProducts().subscribe( products => {
+      this.allProducts = products;
+    })
+  }
 
   ngOnInit() {}
 
   // Buscar producto por el buscador ( nombre )
   onSearchProduct( productName: CustomEventInit ) {
     this.search = productName.detail.value;
+  }
+
+  doSomething( product: Products ) {
+    console.log( product );
   }
 }

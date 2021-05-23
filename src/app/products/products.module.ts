@@ -11,13 +11,12 @@ import { ProductFilterPipe } from './pipes/product-filter.pipe';
     SearchBarComponent,
     ProductFilterPipe
   ],
-  exports: [
-    SearchBarComponent,
-    ProductFilterPipe
-  ],
   imports: [
     CommonModule,
     IonicModule
+  ],
+  exports: [
+    SearchBarComponent
   ]
 })
 export class ProductsModule { }

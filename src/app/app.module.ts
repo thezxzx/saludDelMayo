@@ -16,6 +16,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { SharedModule } from './shared/shared.module';
 import { firebaseConfig } from 'src/environments/environment';
 import { ComponentsModule } from './providers/components/components.module';
+import { CommonModule } from '@angular/common';
+import { ProductsModule } from './products/products.module';
 
 @NgModule({
   declarations: [
@@ -24,12 +26,14 @@ import { ComponentsModule } from './providers/components/components.module';
   entryComponents: [],
   imports: [
     BrowserModule,
+    CommonModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp( firebaseConfig ),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
+    ProductsModule,
     SharedModule,
     ComponentsModule
   ],
