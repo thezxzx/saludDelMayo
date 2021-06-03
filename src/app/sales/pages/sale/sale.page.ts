@@ -16,7 +16,7 @@ export class SalePage implements OnInit {
 
   search: string = '';
   allProducts: Products[] = [];
-
+  searchedProducts: Products[] = [];
 
   constructor(
     private router: Router,
@@ -31,16 +31,18 @@ export class SalePage implements OnInit {
   }
 
   ngOnInit() {
-    // Acción para buscar con scanenr
+    // Acción para buscar con scanner
     let interval;
     let barCode: string = '';
 
+    // evento para buscar con el scanner
     document.addEventListener('keydown', ( e ) => {
       if( interval ) {
         clearInterval(interval);
       }
       if( e.code === 'Enter' ) {
         if( barCode ) {
+          // Evita que se ejecute en otra pantalla
           if( this.router.url === '/sale')
             this.getProductByBarCode( barCode );
         }
@@ -51,7 +53,7 @@ export class SalePage implements OnInit {
         barCode += e.key;
       }
 
-      interval = setInterval( () => barCode = '', 20 );
+      interval = setInterval( () => barCode = '', 500 );
     });
 
     // Evita que el menú se abra arrastrando
@@ -72,10 +74,22 @@ export class SalePage implements OnInit {
 
   // Obtener producto por código de barra
   async getProductByBarCode( barCode: string ) {
-    console.log( this.allProducts );
-    
-    const product = await this.saleService.getProductByBarCode( barCode );
-    console.log( product );
+
+    if( !barCode ){
+      return;
+    }
+
+    const product = this.allProducts.find( item => {
+      return item.barCode === barCode;
+    });
+
+    if ( this.searchedProducts.includes( product ) ) {
+      return;
+    }
+
+    this.searchedProducts.push( product );
+
+
   }
 
   // Mostrar modal

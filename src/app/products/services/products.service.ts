@@ -52,11 +52,11 @@ export class ProductsService {
   }
 
   // Obtener producto por código de barras
-  async getProductByBarCode( barCode: string ): Promise<Products[]> {
+  async getProductByBarCode( barCode: string ): Promise<Products> {
     try {
       const product = await this.productsCollection.ref.where( 'barCode', '==', barCode ).get().then( this.returnDocs );
       // const product = (await this.af.collection('products').ref.where( 'barCode', '==', barCode ).get()).docs[0].data();
-      return product;
+      return product[0];
     } catch ( err ) {
       console.log('🚀 ~ file: products.service.ts ~ line 58 ~ ProductsService ~ getProductByBarCode ~ err', err );
     }

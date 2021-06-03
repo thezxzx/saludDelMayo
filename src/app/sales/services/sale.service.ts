@@ -16,7 +16,6 @@ export class SaleService {
   ) { }
 
   async getProductByBarCode( barCode: string ) {
-    const product = await this.productsService.getProductByBarCode( barCode );
-    return product;
+    return await this.productsService.getProductByBarCode( barCode );
   }
 }
