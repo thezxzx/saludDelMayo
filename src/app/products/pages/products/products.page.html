@@ -6,6 +6,9 @@
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
+      <ion-button (click)="showAllProducts()">
+        Mostrar todos
+      </ion-button>
       <ion-button (click)="presentModal()">
         <ion-icon slot="start" name="add"></ion-icon>
         Buscar
@@ -29,7 +32,7 @@
               <!-- <ion-col size="2" class="ion-text-center"><h6>Proveedor</h6></ion-col> -->
             </ion-row> <!-- Fin de los encabezados-->
 
-            <div class="scroll">
+            <div class="scroll" *ngIf=" filteredProduct.length === 0; else filtered">
               <ion-row *ngFor="let product of allProducts" class="row-product"> <!-- Fila a repetir -->
                 
                 <ion-col size="2" class="ion-text-center">{{ product.barCode }}</ion-col>
@@ -48,6 +51,28 @@
                 </ion-col>
               </ion-row> <!-- Fin de la fila a repetir-->
             </div>
+
+            <ng-template class="scroll" #filtered>
+              <div class="scroll">
+                <ion-row *ngFor="let product of filteredProduct" class="row-product"> <!-- Fila a repetir -->
+                  
+                  <ion-col size="2" class="ion-text-center">{{ product.barCode }}</ion-col>
+                  <ion-col size="2" class="ion-text-center">{{ product.name }}</ion-col>
+                  <ion-col size="2" class="ion-text-center">{{ product.unitPrice }}</ion-col>
+                  <ion-col size="2" class="ion-text-center">{{ product.stock }}</ion-col>
+                  <ion-col size="2" class="ion-text-center">{{ product.category }}</ion-col>
+                  <!-- <ion-col size="2" class="ion-text-center">{{ product.provider }}</ion-col> -->
+                  <ion-col size="2">
+                    <ion-button (click)="fillFormToUpdate( product )">
+                      <ion-icon slot="icon-only" name="sync-outline"></ion-icon>
+                    </ion-button>
+                    <ion-button color="danger" (click)="onDelete( product.id )">
+                      <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row> <!-- Fin de la fila a repetir-->
+              </div>
+            </ng-template>
 
           </ion-grid>
         </ion-col> <!-- Fin de la columna de 8-->

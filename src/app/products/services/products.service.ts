@@ -13,6 +13,7 @@ export class ProductsService {
 
   productsCollection: AngularFirestoreCollection;
   products: Observable<Products[]>;
+  filteredProduct: Products[] = [];
 
   constructor( private af: AngularFirestore ) {
           // Obtener datos cuando se produzca un cambio ( ingresar, actualizar, eliminar )    
@@ -50,6 +51,7 @@ export class ProductsService {
 
   }
 
+  // Obtener producto por código de barras
   async getProductByBarCode( barCode: string ): Promise<Products[]> {
     try {
       const product = await this.productsCollection.ref.where( 'barCode', '==', barCode ).get().then( this.returnDocs );

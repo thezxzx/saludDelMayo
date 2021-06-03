@@ -52,7 +52,7 @@ export class ProductsPage implements OnInit {
                     }
                   });
                 });
-
+                
               }
               
   // Campos del formulario
@@ -69,6 +69,8 @@ export class ProductsPage implements OnInit {
   });
   
   ngOnInit(): void {
+
+
     // Evita que el menú se abra arrastrando
     this.menu.swipeGesture( false, 'first');
   }
@@ -147,5 +149,14 @@ export class ProductsPage implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  // Mostrar todos los productos en la tabla
+  showAllProducts() {
+    this.productsService.filteredProduct = [];
+  }
+
+  get filteredProduct() {
+    return this.productsService.filteredProduct;
   }
 }

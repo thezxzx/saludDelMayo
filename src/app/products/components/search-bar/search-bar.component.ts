@@ -26,7 +26,10 @@ export class SearchBarComponent implements OnInit {
     this.search = productName.detail.value;
   }
 
-  doSomething( product: Products ) {
-    console.log( product );
+  addToFilteredProduct( product: Products ) {
+    if ( this.productsService.filteredProduct.includes( product ) ) {
+      return;
+    }
+    this.productsService.filteredProduct.push( product );
   }
 }
