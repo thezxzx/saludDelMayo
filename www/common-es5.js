@@ -134,222 +134,6 @@
     },
 
     /***/
-    "8z/i":
-    /*!*******************************************************!*\
-      !*** ./src/app/products/services/products.service.ts ***!
-      \*******************************************************/
-
-    /*! exports provided: ProductsService */
-
-    /***/
-    function zI(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "ProductsService", function () {
-        return ProductsService;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/fire/firestore */
-      "I/3d");
-      /* harmony import */
-
-
-      var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! rxjs/operators */
-      "kU1M");
-
-      var ProductsService = /*#__PURE__*/function () {
-        function ProductsService(af) {
-          _classCallCheck(this, ProductsService);
-
-          this.af = af; // Obtener datos cuando se produzca un cambio ( ingresar, actualizar, eliminar )    
-
-          this.productsCollection = this.af.collection('products');
-          this.products = this.productsCollection.snapshotChanges().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (actions) {
-            return actions.map(function (a) {
-              var data = a.payload.doc.data();
-              data.id = a.payload.doc.id;
-              return data;
-            }); // actions / map 
-          } // actions
-          ) // map 
-          ); // pipe 
-        } // constructor
-        // Añadir producto
-
-
-        _createClass(ProductsService, [{
-          key: "addProduct",
-          value: function addProduct(product) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                while (1) {
-                  switch (_context2.prev = _context2.next) {
-                    case 0:
-                      _context2.prev = 0;
-                      _context2.next = 3;
-                      return this.af.collection('products').add(product);
-
-                    case 3:
-                      _context2.next = 8;
-                      break;
-
-                    case 5:
-                      _context2.prev = 5;
-                      _context2.t0 = _context2["catch"](0);
-                      console.log("🚀 ~ file: products.service.ts ~ line 39 ~ ProductsService ~ addProduct ~ err", _context2.t0);
-
-                    case 8:
-                    case "end":
-                      return _context2.stop();
-                  }
-                }
-              }, _callee2, this, [[0, 5]]);
-            }));
-          } // Obtener todos los productos
-
-        }, {
-          key: "getAllProducts",
-          value: function getAllProducts() {
-            try {
-              return this.products;
-            } catch (err) {
-              console.log("🚀 ~ file: products.service.ts ~ line 48 ~ ProductsService ~ getAllProduct ~ err", err);
-            }
-          }
-        }, {
-          key: "getProductByBarCode",
-          value: function getProductByBarCode(barCode) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              var product;
-              return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                while (1) {
-                  switch (_context3.prev = _context3.next) {
-                    case 0:
-                      _context3.prev = 0;
-                      _context3.next = 3;
-                      return this.productsCollection.ref.where('barCode', '==', barCode).get().then(this.returnDocs);
-
-                    case 3:
-                      product = _context3.sent;
-                      return _context3.abrupt("return", product);
-
-                    case 7:
-                      _context3.prev = 7;
-                      _context3.t0 = _context3["catch"](0);
-                      console.log('🚀 ~ file: products.service.ts ~ line 58 ~ ProductsService ~ getProductByBarCode ~ err', _context3.t0);
-
-                    case 10:
-                    case "end":
-                      return _context3.stop();
-                  }
-                }
-              }, _callee3, this, [[0, 7]]);
-            }));
-          } // Eliminar producto
-
-        }, {
-          key: "deleteProduct",
-          value: function deleteProduct(id) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              return regeneratorRuntime.wrap(function _callee4$(_context4) {
-                while (1) {
-                  switch (_context4.prev = _context4.next) {
-                    case 0:
-                      _context4.prev = 0;
-                      _context4.next = 3;
-                      return this.af.collection('products').doc(id)["delete"]();
-
-                    case 3:
-                      _context4.next = 8;
-                      break;
-
-                    case 5:
-                      _context4.prev = 5;
-                      _context4.t0 = _context4["catch"](0);
-                      console.log("🚀 ~ file: products.service.ts ~ line 60 ~ ProductsService ~ deleteProduct ~ err", _context4.t0);
-
-                    case 8:
-                    case "end":
-                      return _context4.stop();
-                  }
-                }
-              }, _callee4, this, [[0, 5]]);
-            }));
-          } // Actualizar producto
-
-        }, {
-          key: "updateProduct",
-          value: function updateProduct(product) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              var id;
-              return regeneratorRuntime.wrap(function _callee5$(_context5) {
-                while (1) {
-                  switch (_context5.prev = _context5.next) {
-                    case 0:
-                      try {
-                        id = product.id;
-                        this.af.collection('products').doc(id).update(product);
-                      } catch (err) {
-                        console.log("🚀 ~ file: products.service.ts ~ line 68 ~ ProductsService ~ updateProduct ~ err", err);
-                      }
-
-                    case 1:
-                    case "end":
-                      return _context5.stop();
-                  }
-                }
-              }, _callee5, this);
-            }));
-          }
-        }, {
-          key: "returnDocs",
-          value: function returnDocs(snapshot) {
-            var docs = [];
-            snapshot.forEach(function (snap) {
-              docs.push(Object.assign({
-                id: snap.id
-              }, snap.data()));
-            });
-            return docs;
-          }
-        }]);
-
-        return ProductsService;
-      }();
-
-      ProductsService.ctorParameters = function () {
-        return [{
-          type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]
-        }];
-      };
-
-      ProductsService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], ProductsService);
-      /***/
-    },
-
-    /***/
     "JbSX":
     /*!*********************************************************************!*\
       !*** ./node_modules/@ionic/core/dist/esm/button-active-4927a4c1.js ***!
@@ -472,6 +256,123 @@
     },
 
     /***/
+    "PZxA":
+    /*!****************************************************!*\
+      !*** ./src/app/auth/services/validator.service.ts ***!
+      \****************************************************/
+
+    /*! exports provided: ValidatorService */
+
+    /***/
+    function PZxA(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "ValidatorService", function () {
+        return ValidatorService;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _products_services_products_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ../../products/services/products.service */
+      "8z/i");
+
+      var ValidatorService = /*#__PURE__*/function () {
+        function ValidatorService(productsService) {
+          var _this = this;
+
+          _classCallCheck(this, ValidatorService);
+
+          this.productsService = productsService;
+          this.allProducts = [];
+          productsService.getAllProducts().subscribe(function (products) {
+            _this.allProducts = products;
+          });
+        }
+
+        _createClass(ValidatorService, [{
+          key: "camposIguales",
+          value: function camposIguales(campo1, campo2) {
+            return function (formGroup) {
+              var _a, _b, _c, _d;
+
+              var pass1 = (_a = formGroup.get(campo1)) === null || _a === void 0 ? void 0 : _a.value;
+              var pass2 = (_b = formGroup.get(campo2)) === null || _b === void 0 ? void 0 : _b.value;
+
+              if (pass1 !== pass2) {
+                (_c = formGroup.get(campo2)) === null || _c === void 0 ? void 0 : _c.setErrors({
+                  noIguales: true
+                });
+                return {
+                  noIguales: true
+                };
+              }
+
+              (_d = formGroup.get(campo2)) === null || _d === void 0 ? void 0 : _d.setErrors(null);
+              return null;
+            };
+          }
+        }, {
+          key: "codigoExiste",
+          value: function codigoExiste(code) {
+            var _this2 = this;
+
+            return function (formGroup) {
+              var _a;
+
+              var barCode = (_a = formGroup.get(code)) === null || _a === void 0 ? void 0 : _a.value;
+              return _this2.allProducts.forEach(function (product) {
+                var _a;
+
+                if (product.barCode === barCode) {
+                  (_a = formGroup.get(code)) === null || _a === void 0 ? void 0 : _a.setErrors({
+                    existeCodigo: true
+                  });
+                  return {
+                    existeCodigo: true
+                  };
+                }
+              }); // if( this.allProducts.includes( barCode ) ) {
+              //   formGroup.get( code )?.setErrors( { existeCodigo: true } );
+              //   console.log( barCode );
+              //   return { existeCodigo: true }
+              // }
+            };
+          }
+        }]);
+
+        return ValidatorService;
+      }();
+
+      ValidatorService.ctorParameters = function () {
+        return [{
+          type: _products_services_products_service__WEBPACK_IMPORTED_MODULE_2__["ProductsService"]
+        }];
+      };
+
+      ValidatorService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+      })], ValidatorService);
+      /***/
+    },
+
+    /***/
     "acej":
     /*!**************************************************************************!*\
       !*** ./node_modules/@ionic/core/dist/esm/framework-delegate-4392cd63.js ***!
@@ -504,22 +405,22 @@
       "1vRN");
 
       var attachComponent = /*#__PURE__*/function () {
-        var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(delegate, container, component, cssClasses, componentProps) {
+        var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(delegate, container, component, cssClasses, componentProps) {
           var el;
-          return regeneratorRuntime.wrap(function _callee6$(_context6) {
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
-              switch (_context6.prev = _context6.next) {
+              switch (_context2.prev = _context2.next) {
                 case 0:
                   if (!delegate) {
-                    _context6.next = 2;
+                    _context2.next = 2;
                     break;
                   }
 
-                  return _context6.abrupt("return", delegate.attachViewToDom(container, component, componentProps, cssClasses));
+                  return _context2.abrupt("return", delegate.attachViewToDom(container, component, componentProps, cssClasses));
 
                 case 2:
                   if (!(typeof component !== 'string' && !(component instanceof HTMLElement))) {
-                    _context6.next = 4;
+                    _context2.next = 4;
                     break;
                   }
 
@@ -539,20 +440,20 @@
                   }
 
                   container.appendChild(el);
-                  _context6.next = 10;
+                  _context2.next = 10;
                   return new Promise(function (resolve) {
                     return Object(_helpers_dd7e4b7b_js__WEBPACK_IMPORTED_MODULE_0__["c"])(el, resolve);
                   });
 
                 case 10:
-                  return _context6.abrupt("return", el);
+                  return _context2.abrupt("return", el);
 
                 case 11:
                 case "end":
-                  return _context6.stop();
+                  return _context2.stop();
               }
             }
-          }, _callee6);
+          }, _callee2);
         }));
 
         return function attachComponent(_x5, _x6, _x7, _x8, _x9) {

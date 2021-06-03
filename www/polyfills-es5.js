@@ -539,7 +539,7 @@
     /***/
     function _(module, exports, __webpack_require__) {
       __webpack_require__(
-      /*! /home/thezx/Escritorio/DesktopApp/tienda/node_modules/@angular-devkit/build-angular/src/webpack/es5-polyfills.js */
+      /*! /home/thezx/Escritorio/Github projects/saludDelMayo/node_modules/@angular-devkit/build-angular/src/webpack/es5-polyfills.js */
       "voQr");
 
       __webpack_require__(
@@ -547,15 +547,15 @@
       "R0gw");
 
       __webpack_require__(
-      /*! /home/thezx/Escritorio/DesktopApp/tienda/node_modules/@angular-devkit/build-angular/src/webpack/jit-polyfills.js */
+      /*! /home/thezx/Escritorio/Github projects/saludDelMayo/node_modules/@angular-devkit/build-angular/src/webpack/jit-polyfills.js */
       "rZy+");
 
       __webpack_require__(
-      /*! /home/thezx/Escritorio/DesktopApp/tienda/node_modules/@angular-devkit/build-angular/src/webpack/es5-jit-polyfills.js */
+      /*! /home/thezx/Escritorio/Github projects/saludDelMayo/node_modules/@angular-devkit/build-angular/src/webpack/es5-jit-polyfills.js */
       "aYjs");
 
       module.exports = __webpack_require__(
-      /*! /home/thezx/Escritorio/DesktopApp/tienda/src/polyfills.ts */
+      /*! /home/thezx/Escritorio/Github projects/saludDelMayo/src/polyfills.ts */
       "hN/g");
       /***/
     },

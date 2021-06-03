@@ -53,6 +53,12 @@ export class LoginPage implements OnInit {
     }
   }
 
+  keyPress( e: KeyboardEvent ) {
+    if( e.key === 'Enter') {
+      this.onLogin();
+    }
+  }
+
   async presentAlert( message: string ) {
 
     const alert = await this.alertCtrl.create({

@@ -56,116 +56,6 @@ const openURL = async (url, ev, direction, animation) => {
 
 /***/ }),
 
-/***/ "8z/i":
-/*!*******************************************************!*\
-  !*** ./src/app/products/services/products.service.ts ***!
-  \*******************************************************/
-/*! exports provided: ProductsService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductsService", function() { return ProductsService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/firestore */ "I/3d");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
-
-
-
-
-let ProductsService = class ProductsService {
-    constructor(af) {
-        this.af = af;
-        // Obtener datos cuando se produzca un cambio ( ingresar, actualizar, eliminar )    
-        this.productsCollection = this.af.collection('products');
-        this.products = this.productsCollection.snapshotChanges()
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(actions => {
-            return actions.map(a => {
-                const data = a.payload.doc.data();
-                data.id = a.payload.doc.id;
-                return data;
-            }); // actions / map 
-        } // actions
-        ) // map 
-        ); // pipe 
-    } // constructor
-    // Añadir producto
-    addProduct(product) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            try {
-                yield this.af.collection('products').add(product);
-            }
-            catch (err) {
-                console.log("🚀 ~ file: products.service.ts ~ line 39 ~ ProductsService ~ addProduct ~ err", err);
-            }
-        });
-    }
-    // Obtener todos los productos
-    getAllProducts() {
-        try {
-            return this.products;
-        }
-        catch (err) {
-            console.log("🚀 ~ file: products.service.ts ~ line 48 ~ ProductsService ~ getAllProduct ~ err", err);
-        }
-    }
-    getProductByBarCode(barCode) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            try {
-                const product = yield this.productsCollection.ref.where('barCode', '==', barCode).get().then(this.returnDocs);
-                // const product = (await this.af.collection('products').ref.where( 'barCode', '==', barCode ).get()).docs[0].data();
-                return product;
-            }
-            catch (err) {
-                console.log('🚀 ~ file: products.service.ts ~ line 58 ~ ProductsService ~ getProductByBarCode ~ err', err);
-            }
-        });
-    }
-    // Eliminar producto
-    deleteProduct(id) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            try {
-                yield this.af.collection('products').doc(id).delete();
-            }
-            catch (err) {
-                console.log("🚀 ~ file: products.service.ts ~ line 60 ~ ProductsService ~ deleteProduct ~ err", err);
-            }
-        });
-    }
-    // Actualizar producto
-    updateProduct(product) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            try {
-                const id = product.id;
-                this.af.collection('products').doc(id).update(product);
-            }
-            catch (err) {
-                console.log("🚀 ~ file: products.service.ts ~ line 68 ~ ProductsService ~ updateProduct ~ err", err);
-            }
-        });
-    }
-    returnDocs(snapshot) {
-        const docs = [];
-        snapshot.forEach(snap => {
-            docs.push(Object.assign({ id: snap.id }, snap.data()));
-        });
-        return docs;
-    }
-};
-ProductsService.ctorParameters = () => [
-    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"] }
-];
-ProductsService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], ProductsService);
-
-
-
-/***/ }),
-
 /***/ "JbSX":
 /*!*********************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/button-active-4927a4c1.js ***!
@@ -242,6 +132,75 @@ const createButtonActiveGesture = (el, isButton) => {
   });
 };
 
+
+
+
+/***/ }),
+
+/***/ "PZxA":
+/*!****************************************************!*\
+  !*** ./src/app/auth/services/validator.service.ts ***!
+  \****************************************************/
+/*! exports provided: ValidatorService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ValidatorService", function() { return ValidatorService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _products_services_products_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../products/services/products.service */ "8z/i");
+
+
+
+let ValidatorService = class ValidatorService {
+    constructor(productsService) {
+        this.productsService = productsService;
+        this.allProducts = [];
+        productsService.getAllProducts().subscribe(products => {
+            this.allProducts = products;
+        });
+    }
+    camposIguales(campo1, campo2) {
+        return (formGroup) => {
+            var _a, _b, _c, _d;
+            const pass1 = (_a = formGroup.get(campo1)) === null || _a === void 0 ? void 0 : _a.value;
+            const pass2 = (_b = formGroup.get(campo2)) === null || _b === void 0 ? void 0 : _b.value;
+            if (pass1 !== pass2) {
+                (_c = formGroup.get(campo2)) === null || _c === void 0 ? void 0 : _c.setErrors({ noIguales: true });
+                return { noIguales: true };
+            }
+            (_d = formGroup.get(campo2)) === null || _d === void 0 ? void 0 : _d.setErrors(null);
+            return null;
+        };
+    }
+    codigoExiste(code) {
+        return (formGroup) => {
+            var _a;
+            const barCode = (_a = formGroup.get(code)) === null || _a === void 0 ? void 0 : _a.value;
+            return this.allProducts.forEach(product => {
+                var _a;
+                if (product.barCode === barCode) {
+                    (_a = formGroup.get(code)) === null || _a === void 0 ? void 0 : _a.setErrors({ existeCodigo: true });
+                    return { existeCodigo: true };
+                }
+            });
+            // if( this.allProducts.includes( barCode ) ) {
+            //   formGroup.get( code )?.setErrors( { existeCodigo: true } );
+            //   console.log( barCode );
+            //   return { existeCodigo: true }
+            // }
+        };
+    }
+};
+ValidatorService.ctorParameters = () => [
+    { type: _products_services_products_service__WEBPACK_IMPORTED_MODULE_2__["ProductsService"] }
+];
+ValidatorService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], ValidatorService);
 
 
 

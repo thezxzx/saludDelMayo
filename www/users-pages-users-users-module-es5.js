@@ -204,7 +204,9 @@
           this.users = this.userService.getAllUsers();
           this.users.subscribe(function (users) {
             console.log(users);
-            _this.allUsers = users;
+            _this.allUsers = users.filter(function (user) {
+              return user.role !== 'Administrador';
+            });
           });
         }
 
@@ -437,28 +439,24 @@
                   switch (_context2.prev = _context2.next) {
                     case 0:
                       _context2.prev = 0;
-                      this.afa.user.subscribe(function (user) {
-                        user["delete"]();
-                      });
-                      this.afa.signOut();
-                      _context2.next = 5;
+                      _context2.next = 3;
                       return this.af.collection('users').doc(id)["delete"]();
 
-                    case 5:
-                      _context2.next = 10;
+                    case 3:
+                      _context2.next = 8;
                       break;
 
-                    case 7:
-                      _context2.prev = 7;
+                    case 5:
+                      _context2.prev = 5;
                       _context2.t0 = _context2["catch"](0);
                       console.log(_context2.t0);
 
-                    case 10:
+                    case 8:
                     case "end":
                       return _context2.stop();
                   }
                 }
-              }, _callee2, this, [[0, 7]]);
+              }, _callee2, this, [[0, 5]]);
             }));
           }
         }]);

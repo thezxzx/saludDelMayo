@@ -170,6 +170,7 @@ let RegisterPage = class RegisterPage {
                         uid: user.uid
                     };
                     this.authService.addUser(userData);
+                    yield this.verifyEmailAlert();
                 }
             }
             catch (err) {
@@ -192,12 +193,16 @@ let RegisterPage = class RegisterPage {
                     {
                         text: 'OK',
                         handler: () => {
+                            this.form.reset();
                             this.router.navigate(['/login']);
                         }
                     }
                 ]
             });
             yield alert.present();
+            const { role } = yield alert.onDidDismiss();
+            this.form.reset();
+            this.router.navigate(['/login']);
         });
     }
 };
@@ -266,47 +271,6 @@ RegisterPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorat
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
     })
 ], RegisterPageRoutingModule);
-
-
-
-/***/ }),
-
-/***/ "PZxA":
-/*!****************************************************!*\
-  !*** ./src/app/auth/services/validator.service.ts ***!
-  \****************************************************/
-/*! exports provided: ValidatorService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ValidatorService", function() { return ValidatorService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-
-
-let ValidatorService = class ValidatorService {
-    constructor() { }
-    camposIguales(campo1, campo2) {
-        return (formGroup) => {
-            var _a, _b, _c, _d;
-            const pass1 = (_a = formGroup.get(campo1)) === null || _a === void 0 ? void 0 : _a.value;
-            const pass2 = (_b = formGroup.get(campo2)) === null || _b === void 0 ? void 0 : _b.value;
-            if (pass1 !== pass2) {
-                (_c = formGroup.get(campo2)) === null || _c === void 0 ? void 0 : _c.setErrors({ noIguales: true });
-                return { noIguales: true };
-            }
-            (_d = formGroup.get(campo2)) === null || _d === void 0 ? void 0 : _d.setErrors(null);
-            return null;
-        };
-    }
-};
-ValidatorService.ctorParameters = () => [];
-ValidatorService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], ValidatorService);
 
 
 

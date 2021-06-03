@@ -116,7 +116,9 @@ let UsersPage = class UsersPage {
         this.users
             .subscribe(users => {
             console.log(users);
-            this.allUsers = users;
+            this.allUsers = users.filter(user => {
+                return user.role !== 'Administrador';
+            });
         });
     }
     ngOnInit() {
@@ -257,10 +259,6 @@ let UserService = class UserService {
     deleteUser(id) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             try {
-                this.afa.user.subscribe(user => {
-                    user.delete();
-                });
-                this.afa.signOut();
                 yield this.af.collection('users').doc(id).delete();
             }
             catch (err) {

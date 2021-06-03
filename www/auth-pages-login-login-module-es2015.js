@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n  <ion-toolbar>\n    <ion-title class=\"ion-text-center\">Iniciar sesión</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <div class=\"main\">\n    <form (ngSubmit)=\"onLogin()\" [formGroup]=\"form\">\n\n      <ion-item>\n        <ion-label position=\"floating\">Correo</ion-label>\n        <ion-input type=\"email\" formControlName=\"email\"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"floating\">Contraseña</ion-label>\n        <ion-input type=\"password\" formControlName=\"password\"></ion-input>\n      </ion-item>\n\n      <div>\n        <ion-item class=\"no-border\">\n          <a routerLink=\"/register\">Haz clic aquí para registrarte.</a>\n        </ion-item>\n      </div>\n\n      <div class=\"form-button ion-margin-top\">\n        <ion-button expand=\"block\" type=\"submit\">\n          Iniciar sesión\n        </ion-button>\n      </div>\n    </form>\n  </div>\n\n  <ion-button (click)=\"onLogout()\" expand=\"block\" fill=\"clear\" shape=\"round\" color=\"danger\">\n    Cerrar sesión\n  </ion-button>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n  <ion-toolbar>\n    <ion-title class=\"ion-text-center\">Iniciar sesión</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <div class=\"main\">\n    <form (ngSubmit)=\"onLogin()\" [formGroup]=\"form\">\n\n      <ion-item>\n        <ion-label position=\"floating\">Correo</ion-label>\n        <ion-input type=\"email\" formControlName=\"email\"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"floating\">Contraseña</ion-label>\n        <ion-input\n          type=\"password\"\n          formControlName=\"password\"\n          (keypress)=\"keyPress($event)\"></ion-input>\n      </ion-item>\n\n      <div>\n        <ion-item class=\"no-border\">\n          <a routerLink=\"/register\">Haz clic aquí para registrarte.</a>\n        </ion-item>\n      </div>\n\n      <div class=\"form-button ion-margin-top\">\n        <ion-button expand=\"block\">\n          Iniciar sesión\n        </ion-button>\n      </div>\n    </form>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -53,11 +53,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let LoginPage = class LoginPage {
-    constructor(fb, authService, menu, router) {
+    constructor(fb, authService, menu, router, alertCtrl) {
         this.fb = fb;
         this.authService = authService;
         this.menu = menu;
         this.router = router;
+        this.alertCtrl = alertCtrl;
         this.emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
         this.form = this.fb.group({
             email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern(this.emailPattern)]],
@@ -77,6 +78,9 @@ let LoginPage = class LoginPage {
                     if (isEmailVerified) {
                         this.router.navigate(['/home']);
                     }
+                    else {
+                        this.presentAlert('Correo no verificado');
+                    }
                 }
             }
             catch (err) {
@@ -85,15 +89,28 @@ let LoginPage = class LoginPage {
             }
         });
     }
-    onLogout() {
-        this.authService.logout();
+    keyPress(e) {
+        if (e.key === 'Enter') {
+            this.onLogin();
+        }
+    }
+    presentAlert(message) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertCtrl.create({
+                header: '',
+                message,
+                buttons: ['OK']
+            });
+            yield alert.present();
+        });
     }
 };
 LoginPage.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] },
     { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] }
 ];
 LoginPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({

@@ -22,7 +22,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar>\n    <ion-title class=\"ion-text-center\">Iniciar sesión</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <div class=\"main\">\n    <form (ngSubmit)=\"onLogin()\" [formGroup]=\"form\">\n\n      <ion-item>\n        <ion-label position=\"floating\">Correo</ion-label>\n        <ion-input type=\"email\" formControlName=\"email\"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"floating\">Contraseña</ion-label>\n        <ion-input type=\"password\" formControlName=\"password\"></ion-input>\n      </ion-item>\n\n      <div>\n        <ion-item class=\"no-border\">\n          <a routerLink=\"/register\">Haz clic aquí para registrarte.</a>\n        </ion-item>\n      </div>\n\n      <div class=\"form-button ion-margin-top\">\n        <ion-button expand=\"block\" type=\"submit\">\n          Iniciar sesión\n        </ion-button>\n      </div>\n    </form>\n  </div>\n\n  <ion-button (click)=\"onLogout()\" expand=\"block\" fill=\"clear\" shape=\"round\" color=\"danger\">\n    Cerrar sesión\n  </ion-button>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header class=\"ion-no-border\">\n  <ion-toolbar>\n    <ion-title class=\"ion-text-center\">Iniciar sesión</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <div class=\"main\">\n    <form (ngSubmit)=\"onLogin()\" [formGroup]=\"form\">\n\n      <ion-item>\n        <ion-label position=\"floating\">Correo</ion-label>\n        <ion-input type=\"email\" formControlName=\"email\"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"floating\">Contraseña</ion-label>\n        <ion-input\n          type=\"password\"\n          formControlName=\"password\"\n          (keypress)=\"keyPress($event)\"></ion-input>\n      </ion-item>\n\n      <div>\n        <ion-item class=\"no-border\">\n          <a routerLink=\"/register\">Haz clic aquí para registrarte.</a>\n        </ion-item>\n      </div>\n\n      <div class=\"form-button ion-margin-top\">\n        <ion-button expand=\"block\">\n          Iniciar sesión\n        </ion-button>\n      </div>\n    </form>\n  </div>\n</ion-content>\n";
       /***/
     },
 
@@ -115,13 +115,14 @@
       "tyNb");
 
       var LoginPage = /*#__PURE__*/function () {
-        function LoginPage(fb, authService, menu, router) {
+        function LoginPage(fb, authService, menu, router, alertCtrl) {
           _classCallCheck(this, LoginPage);
 
           this.fb = fb;
           this.authService = authService;
           this.menu = menu;
           this.router = router;
+          this.alertCtrl = alertCtrl;
           this.emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
           this.form = this.fb.group({
             email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern(this.emailPattern)]],
@@ -156,6 +157,8 @@
 
                         if (isEmailVerified) {
                           this.router.navigate(['/home']);
+                        } else {
+                          this.presentAlert('Correo no verificado');
                         }
                       }
 
@@ -177,9 +180,40 @@
             }));
           }
         }, {
-          key: "onLogout",
-          value: function onLogout() {
-            this.authService.logout();
+          key: "keyPress",
+          value: function keyPress(e) {
+            if (e.key === 'Enter') {
+              this.onLogin();
+            }
+          }
+        }, {
+          key: "presentAlert",
+          value: function presentAlert(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              var alert;
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      _context2.next = 2;
+                      return this.alertCtrl.create({
+                        header: '',
+                        message: message,
+                        buttons: ['OK']
+                      });
+
+                    case 2:
+                      alert = _context2.sent;
+                      _context2.next = 5;
+                      return alert.present();
+
+                    case 5:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee2, this);
+            }));
           }
         }]);
 
@@ -195,6 +229,8 @@
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["MenuController"]
         }, {
           type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"]
         }];
       };
 

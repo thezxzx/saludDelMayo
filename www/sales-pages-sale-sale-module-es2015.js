@@ -1,40 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["sales-pages-sale-sale-module"],{
 
-/***/ "FGgO":
-/*!****************************************************!*\
-  !*** ./src/app/sales/pipes/product-filter.pipe.ts ***!
-  \****************************************************/
-/*! exports provided: ProductFilterPipe */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductFilterPipe", function() { return ProductFilterPipe; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-
-
-let ProductFilterPipe = class ProductFilterPipe {
-    transform(allProducts, searchProduct) {
-        if (searchProduct === '') {
-            return;
-        }
-        searchProduct = searchProduct.toLowerCase();
-        return allProducts.filter(item => {
-            return item.name.toLowerCase().includes(searchProduct);
-        });
-    }
-};
-ProductFilterPipe = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Pipe"])({
-        name: 'productFilter'
-    })
-], ProductFilterPipe);
-
-
-
-/***/ }),
-
 /***/ "IbY2":
 /*!*********************************************************!*\
   !*** ./src/app/sales/pages/sale/sale-routing.module.ts ***!
@@ -129,6 +94,9 @@ let SalePage = class SalePage {
         this.menu.enable(true, 'first');
         this.menu.open('first');
     }
+    openModal(e) {
+        console.log(e.key);
+    }
     // Buscar producto por el buscador ( nombre )
     onSearchProduct(productName) {
         this.search = productName.detail.value;
@@ -164,7 +132,7 @@ SalePage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"onToggleMenu()\">\n        <ion-icon slot=\"icon-only\" name=\"menu-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title class=\"ion-text-center\">Ventas</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<!-- \n  Campos a mostrar en la tabla\n  * Codigo\n  * nombre\n  * cantidad\n  * precio\n -->\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col size=\"9\">\n        <ion-grid>\n          <ion-row> <!-- Encabezados -->\n            <ion-col size=\"3\" class=\"ion-text-center\"><h6> Código </h6></ion-col>\n            <ion-col size=\"3\" class=\"ion-text-center\"><h6> Nombre </h6></ion-col>\n            <ion-col size=\"2\" class=\"ion-text-center\"><h6> Precio </h6></ion-col>\n            <ion-col size=\"2\" class=\"ion-text-center\"><h6> Cantidad </h6></ion-col>\n          </ion-row> <!-- Fin de los encabezados-->\n          <ion-row *ngFor=\"let product of [0, 1, 2]\"> <!-- Fila a repetir -->\n            <ion-col size=\"3\" class=\"ion-text-center\">\n              <p>Código</p>\n            </ion-col>\n            <ion-col size=\"3\" class=\"ion-text-center\">\n              <p>Nombre</p>\n            </ion-col>\n            <ion-col size=\"2\" class=\"ion-text-center\">\n              <p>Precio</p>\n            </ion-col>\n            <ion-col size=\"2\" class=\"ion-text-center\">\n              <ion-input type=\"number\" value=\"1\" min=\"0\" max=\"20\"></ion-input>\n            </ion-col>\n            <ion-col size=\"2\">\n              <ion-button color=\"danger\" (click)=\" getProductByBarCode( '123123123' ) \">\n                <ion-icon slot=\"icon-only\" name=\"trash-outline\"></ion-icon>\n              </ion-button>\n            </ion-col>\n          </ion-row> <!-- Fin de la fila a repetir-->\n        </ion-grid>\n      </ion-col> <!-- Fin de la columna de 9-->\n      <ion-col size=\"3\"> <!-- Columna de la barra de búsqueda-->\n        <ion-searchbar\n          placeholder=\"buscar\"\n          animated\n          debounce=\"500\"\n          (ionChange)=\"onSearchProduct( $event )\"\n          >\n        </ion-searchbar>\n        <ion-list>\n          <ion-item *ngFor=\"let product of allProducts | productFilter: search\">\n            <ion-label>{{ product.name }}</ion-label>\n          </ion-item>\n        </ion-list>\n          <!-- <ion-list *ngIf=\"isItemAvailable\">\n            <ion-item *ngFor=\"let producto of productosFiltrados\"> {{ producto.nombre }} </ion-item>\n          </ion-list> -->\n          \n      </ion-col> <!-- Fin de la columna de la barra de búsqueda-->\n    </ion-row> <!-- Fin de la fila principal -->\n  </ion-grid>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header class=\"ion-no-border\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"onToggleMenu()\">\n        <ion-icon slot=\"icon-only\" name=\"menu-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title class=\"ion-text-center\">Ventas</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<!-- \n  Campos a mostrar en la tabla\n  * Codigo\n  * nombre\n  * cantidad\n  * precio\n -->\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col size=\"9\">\n        <ion-grid>\n          <ion-row> <!-- Encabezados -->\n            <ion-col size=\"3\" class=\"ion-text-center\"><h6> Código </h6></ion-col>\n            <ion-col size=\"3\" class=\"ion-text-center\"><h6> Nombre </h6></ion-col>\n            <ion-col size=\"2\" class=\"ion-text-center\"><h6> Precio </h6></ion-col>\n            <ion-col size=\"2\" class=\"ion-text-center\"><h6> Cantidad </h6></ion-col>\n          </ion-row> <!-- Fin de los encabezados-->\n          <ion-row *ngFor=\"let product of [0, 1, 2]\"> <!-- Fila a repetir -->\n            <ion-col size=\"3\" class=\"ion-text-center\">\n              <p>Código</p>\n            </ion-col>\n            <ion-col size=\"3\" class=\"ion-text-center\">\n              <p>Nombre</p>\n            </ion-col>\n            <ion-col size=\"2\" class=\"ion-text-center\">\n              <p>Precio</p>\n            </ion-col>\n            <ion-col size=\"2\" class=\"ion-text-center\">\n              <ion-input type=\"number\" value=\"1\" min=\"0\" max=\"20\" (keypress)=\"openModal( $event )\"></ion-input>\n            </ion-col>\n            <ion-col size=\"2\">\n              <ion-button color=\"danger\" (click)=\" getProductByBarCode( '123123123' ) \">\n                <ion-icon slot=\"icon-only\" name=\"trash-outline\"></ion-icon>\n              </ion-button>\n            </ion-col>\n          </ion-row> <!-- Fin de la fila a repetir-->\n        </ion-grid>\n      </ion-col> <!-- Fin de la columna de 9-->\n    </ion-row> <!-- Fin de la fila principal -->\n  </ion-grid>\n</ion-content>\n");
 
 /***/ }),
 
@@ -225,8 +193,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
 /* harmony import */ var _sale_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sale-routing.module */ "IbY2");
 /* harmony import */ var _sale_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./sale.page */ "ah6Z");
-/* harmony import */ var _pipes_product_filter_pipe__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../pipes/product-filter.pipe */ "FGgO");
-
 
 
 
@@ -245,8 +211,7 @@ SalePageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _sale_routing_module__WEBPACK_IMPORTED_MODULE_5__["SalePageRoutingModule"]
         ],
         declarations: [
-            _sale_page__WEBPACK_IMPORTED_MODULE_6__["SalePage"],
-            _pipes_product_filter_pipe__WEBPACK_IMPORTED_MODULE_7__["ProductFilterPipe"]
+            _sale_page__WEBPACK_IMPORTED_MODULE_6__["SalePage"]
         ]
     })
 ], SalePageModule);

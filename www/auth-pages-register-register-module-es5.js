@@ -263,34 +263,40 @@
                     case 10:
                       user = _context.sent;
 
-                      if (user) {
-                        // Alerta para verificar correo
-                        userData = {
-                          name: this.form.get('name').value,
-                          lastName: this.form.get('lastName').value,
-                          email: this.form.get('email').value,
-                          emailVerified: user.emailVerified,
-                          phone: this.form.get('phone').value,
-                          role: 'Empleado',
-                          uid: user.uid
-                        };
-                        this.authService.addUser(userData);
+                      if (!user) {
+                        _context.next = 16;
+                        break;
                       }
 
-                      _context.next = 17;
+                      // Alerta para verificar correo
+                      userData = {
+                        name: this.form.get('name').value,
+                        lastName: this.form.get('lastName').value,
+                        email: this.form.get('email').value,
+                        emailVerified: user.emailVerified,
+                        phone: this.form.get('phone').value,
+                        role: 'Empleado',
+                        uid: user.uid
+                      };
+                      this.authService.addUser(userData);
+                      _context.next = 16;
+                      return this.verifyEmailAlert();
+
+                    case 16:
+                      _context.next = 21;
                       break;
 
-                    case 14:
-                      _context.prev = 14;
+                    case 18:
+                      _context.prev = 18;
                       _context.t0 = _context["catch"](4);
                       console.log("🚀 ~ file: register.page.ts ~ line 40 ~ RegisterPage ~ onRegister ~ err", _context.t0);
 
-                    case 17:
+                    case 21:
                     case "end":
                       return _context.stop();
                   }
                 }
-              }, _callee, this, [[4, 14]]);
+              }, _callee, this, [[4, 18]]);
             }));
           } // Mensajes de errores
 
@@ -308,7 +314,8 @@
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
               var _this = this;
 
-              var alert;
+              var alert, _yield$alert$onDidDis, role;
+
               return regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
                   switch (_context2.prev = _context2.next) {
@@ -320,6 +327,8 @@
                         buttons: [{
                           text: 'OK',
                           handler: function handler() {
+                            _this.form.reset();
+
                             _this.router.navigate(['/login']);
                           }
                         }]
@@ -331,6 +340,16 @@
                       return alert.present();
 
                     case 5:
+                      _context2.next = 7;
+                      return alert.onDidDismiss();
+
+                    case 7:
+                      _yield$alert$onDidDis = _context2.sent;
+                      role = _yield$alert$onDidDis.role;
+                      this.form.reset();
+                      this.router.navigate(['/login']);
+
+                    case 11:
                     case "end":
                       return _context2.stop();
                   }
@@ -444,80 +463,6 @@
         imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
       })], RegisterPageRoutingModule);
-      /***/
-    },
-
-    /***/
-    "PZxA":
-    /*!****************************************************!*\
-      !*** ./src/app/auth/services/validator.service.ts ***!
-      \****************************************************/
-
-    /*! exports provided: ValidatorService */
-
-    /***/
-    function PZxA(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "ValidatorService", function () {
-        return ValidatorService;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-
-      var ValidatorService = /*#__PURE__*/function () {
-        function ValidatorService() {
-          _classCallCheck(this, ValidatorService);
-        }
-
-        _createClass(ValidatorService, [{
-          key: "camposIguales",
-          value: function camposIguales(campo1, campo2) {
-            return function (formGroup) {
-              var _a, _b, _c, _d;
-
-              var pass1 = (_a = formGroup.get(campo1)) === null || _a === void 0 ? void 0 : _a.value;
-              var pass2 = (_b = formGroup.get(campo2)) === null || _b === void 0 ? void 0 : _b.value;
-
-              if (pass1 !== pass2) {
-                (_c = formGroup.get(campo2)) === null || _c === void 0 ? void 0 : _c.setErrors({
-                  noIguales: true
-                });
-                return {
-                  noIguales: true
-                };
-              }
-
-              (_d = formGroup.get(campo2)) === null || _d === void 0 ? void 0 : _d.setErrors(null);
-              return null;
-            };
-          }
-        }]);
-
-        return ValidatorService;
-      }();
-
-      ValidatorService.ctorParameters = function () {
-        return [];
-      };
-
-      ValidatorService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], ValidatorService);
       /***/
     },
 
