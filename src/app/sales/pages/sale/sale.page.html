@@ -54,7 +54,12 @@
               <p>{{ product.unitPrice }}</p>
             </ion-col>
             <ion-col size="2" class="ion-text-center">
-              <ion-input type="number" value="1" min="1" [max]="product.stock"></ion-input>
+              <ion-input type="number"
+                value="1"
+                min="1"
+                [max]="product.stock"
+                (ionChange)="getProductValues( product, $event )
+                "></ion-input>
             </ion-col>
             <ion-col size="2">
               <ion-button color="danger" (click)="getProductByBarCode('')">
@@ -64,6 +69,31 @@
           </ion-row> <!-- Fin de la fila a repetir-->
         </ion-grid>
       </ion-col> <!-- Fin de la columna de 9-->
+      <ion-col size="3">
+        <form (ngSubmit)="onAddSale()" [formGroup]="form">          
+          <ion-item>
+            <ion-label>Total:</ion-label>
+            <ion-input type="number" formControlName="total" readonly></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Pagado:</ion-label>
+            <ion-input type="number" formControlName="pagado" (ionChange)="cambio()"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Cambio:</ion-label>
+            <ion-input type="number" readonly formControlName="cambio"></ion-input>
+          </ion-item>
+
+
+          <ion-button expand="block" type="submit">
+            Pagar
+          </ion-button>
+          
+
+        </form>
+      </ion-col>
     </ion-row> <!-- Fin de la fila principal -->
   </ion-grid>
 </ion-content>

@@ -40,8 +40,9 @@ export class ValidatorService {
       return this.allProducts.forEach( product => {
         if( product.barCode === barCode ) {
           formGroup.get( code )?.setErrors( { existeCodigo: true } );
-            return { existeCodigo: true }
-          }
+          return ({ existeCodigo: true })
+        }
+        return null;
       });
 
       // if( this.allProducts.includes( barCode ) ) {
@@ -49,6 +50,20 @@ export class ValidatorService {
       //   console.log( barCode );
       //   return { existeCodigo: true }
       // }
-    } 
+    }
+  }
+
+  precioIgualMayor( total: string, payment: string ) {
+    return ( formGroup: AbstractControl ) => {
+      const tot = formGroup.get( total )?.value;
+      const pay = formGroup.get( payment )?.value;
+
+      if( tot - pay > 0)  {
+        formGroup.get( payment )?.setErrors( { pagoInsuficiente: true } );
+        return ( { pagoInsuficiente: true } );
+      }
+      return null;
+
+    }
   }
 }
