@@ -26,6 +26,8 @@ export class SalePage implements OnInit {
   allProducts: Products[] = [];
   searchedProducts: Products[] = [];
   totalReal: number = 0;
+  payment: number = 0;
+  change: number = 0;
 
   sales = [];
 
@@ -90,9 +92,9 @@ export class SalePage implements OnInit {
   }
 
   cambio() {
-    const pagado = this.form.get('pagado').value;
-    const cambio = pagado - this.totalReal;
-    this.form.get('cambio').setValue( cambio );
+    this.payment = this.form.get('pagado').value;
+    this.change = this.payment - this.totalReal;
+    this.form.get('cambio').setValue( this.change );
   }
 
   // Añadir venta
@@ -122,7 +124,7 @@ export class SalePage implements OnInit {
 
     this.totalReal = total;
     this.form.get('total').setValue(this.totalReal);
-    
+    this.form.get('cambio').setValue( this.payment - this.totalReal );
   }
 
   // Buscar producto por el buscador ( nombre )
@@ -170,6 +172,7 @@ export class SalePage implements OnInit {
     });
     this.totalReal = total;
     this.form.get('total').setValue( this.totalReal );
+    this.form.get('cambio').setValue( this.payment - this.totalReal );
   }
   
   // Mostrar modal
