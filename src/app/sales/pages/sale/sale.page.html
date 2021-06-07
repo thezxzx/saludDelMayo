@@ -42,7 +42,7 @@
               <h6> Cantidad </h6>
             </ion-col>
           </ion-row> <!-- Fin de los encabezados-->
-          <ion-row *ngFor="let product of searchedProducts">
+          <ion-row *ngFor="let product of searchedProducts; let i = index">
             <!-- Fila a repetir -->
             <ion-col size="3" class="ion-text-center">
               <p>{{ product.barCode }}</p>
@@ -62,7 +62,7 @@
                 "></ion-input>
             </ion-col>
             <ion-col size="2">
-              <ion-button color="danger" (click)="getProductByBarCode('')">
+              <ion-button color="danger" (click)="deleteFromTable( product, i )">
                 <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
               </ion-button>
             </ion-col>

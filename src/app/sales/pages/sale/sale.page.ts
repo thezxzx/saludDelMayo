@@ -184,4 +184,19 @@ export class SalePage implements OnInit {
     return await modal.present();
   }
 
+  deleteFromTable( product: Products, index: number ) {
+    this.searchedProducts.splice( index, 1 );
+    delete this.sales[product.id];
+
+    let total = 0;
+    this.searchedProducts.forEach( prod => {
+      total += this.sales[ prod.id ].quantity * this.sales[ prod.id ].unitPrice;
+    }); 
+
+    this.totalReal = total;
+    this.form.get('total').setValue(this.totalReal);
+    this.form.get('cambio').setValue( this.payment - this.totalReal );
+    
+  }
+
 }
