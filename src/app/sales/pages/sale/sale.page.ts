@@ -8,12 +8,6 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidatorService } from '../../../auth/services/validator.service';
 
-interface Sale {
-  id: string;
-  quantity: number;
-  unitPrice: number;
-}
-
 @Component({
   selector: 'app-sale',
   templateUrl: './sale.page.html',
@@ -41,8 +35,9 @@ export class SalePage implements OnInit {
     private productsService: ProductsService
   ) {
     this.productsService.getAllProducts().subscribe( products => {
-      this.allProducts = products;      
+      this.allProducts = products.filter( item => item.stock > 0);      
     });
+
   }
 
   // Formulario
@@ -99,12 +94,17 @@ export class SalePage implements OnInit {
 
   // Añadir venta
   onAddSale() {
+    if( this.form.invalid ) {
+      console.log( this.form.value );
+      return;
+    }
 
+    this.saleService.addSale( this.sales, this.searchedProducts, this.form.value );
 
-    // Confunde mucho
-    // this.searchedProducts.forEach( product => {
-    //   this.getProductValues( product, 1 );
-    // });
+    this.form.reset();
+    this.sales = [];
+    this.searchedProducts = [];
+    this.form.get('cambio').setValue( '' );
 
   }
 
@@ -140,6 +140,7 @@ export class SalePage implements OnInit {
       return;
     };
 
+
     this.allProducts.find( item => {
       if( item.barCode === barCode ) {
         existsBarCode = true;
@@ -160,7 +161,8 @@ export class SalePage implements OnInit {
     
     const productID = product.id;
     const unitPrice = product.unitPrice;
-    this.sales[ productID ] = { productID, unitPrice, quantity: "1" }
+    const productName = product.name;
+    this.sales[ productID ] = { productID, productName, unitPrice, quantity: "1" }
 
     this.searchedProducts.push( product );
 
