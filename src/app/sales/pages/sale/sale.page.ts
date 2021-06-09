@@ -42,9 +42,9 @@ export class SalePage implements OnInit {
 
   // Formulario
   form: FormGroup = this.formBuilder.group({
-    pagado: [ , [ Validators.required, Validators.min( 1 ) ] ],
-    cambio: [ , [ Validators.required, Validators.min( 0 ) ] ],
-    total: [ , [ Validators.required, Validators.min( 1 ) ] ]
+    pagado: [ 0, [ Validators.required, Validators.min( 1 ) ] ],
+    cambio: [ 0, [ Validators.required, Validators.min( 0 ) ] ],
+    total: [ 0, [ Validators.required, Validators.min( 1 ) ] ]
   }, {
     validators: [ this.validatorService.precioIgualMayor( 'total', 'pagado' ) ]
   } );
@@ -88,7 +88,7 @@ export class SalePage implements OnInit {
 
   cambio() {
     this.payment = this.form.get('pagado').value;
-    this.change = this.payment - this.totalReal;
+    this.change = this.payment - this.totalReal > 0 ? this.payment- this.totalReal : 0;
     this.form.get('cambio').setValue( this.change );
   }
 
@@ -104,7 +104,7 @@ export class SalePage implements OnInit {
     this.form.reset();
     this.sales = [];
     this.searchedProducts = [];
-    this.form.get('cambio').setValue( '' );
+    this.form.get('cambio').setValue( 0 );
 
   }
 
@@ -124,7 +124,8 @@ export class SalePage implements OnInit {
 
     this.totalReal = total;
     this.form.get('total').setValue(this.totalReal);
-    this.form.get('cambio').setValue( this.payment - this.totalReal );
+    this.change = this.payment - this.totalReal > 0 ? this.payment- this.totalReal : 0; 
+    this.form.get('cambio').setValue( this.change );
   }
 
   // Buscar producto por el buscador ( nombre )
@@ -174,7 +175,8 @@ export class SalePage implements OnInit {
     });
     this.totalReal = total;
     this.form.get('total').setValue( this.totalReal );
-    this.form.get('cambio').setValue( this.payment - this.totalReal );
+    this.change = this.payment - this.totalReal > 0 ? this.payment- this.totalReal : 0; 
+    this.form.get('cambio').setValue( this.change );
   }
   
   // Mostrar modal
@@ -197,7 +199,8 @@ export class SalePage implements OnInit {
 
     this.totalReal = total;
     this.form.get('total').setValue(this.totalReal);
-    this.form.get('cambio').setValue( this.payment - this.totalReal );
+    this.change = this.payment - this.totalReal > 0 ? this.payment- this.totalReal : 0; 
+    this.form.get('cambio').setValue( this.change );
     
   }
 

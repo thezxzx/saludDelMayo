@@ -20,6 +20,16 @@ export class SaleService {
     private af: AngularFirestore
   ) { }
 
+  async getSalesToday() {
+    try {
+      const todayDate = new Date().toLocaleDateString();
+      const doc = this.af.collection('sales').ref.where('createdAt', '==', todayDate )
+            .get();
+      return doc;
+    } catch ( err ) {
+      console.log( err );
+    }
+  }
 
   // Agregar venta
   async addSale( sale: Sale[], searchedProducts: Products[], form: any ): Promise<void> {
@@ -37,7 +47,7 @@ export class SaleService {
         product.quantity = sale[prod.id].quantity;
         product.unitPrice = sale[prod.id].unitPrice;
 
-        products[prod.name] = product;
+        products[prod.name] = {...product};
 
         this.updateFromProducts( prod.id, stock );
       });
@@ -45,12 +55,12 @@ export class SaleService {
       products['total'] = form.total;
       products['pagado'] = form.pagado;
       products['cambio'] = form.cambio;
-      console.log( products );
+      products['createdAt'] = new Date().toLocaleDateString();
 
       await this.af.collection('sales').add( products );
-      // await this.updateFromProducts( sale.productID )
+      
     } catch ( err ) {
-      console.log('Error en la línea 28 de sale.service.ts', err);
+      console.log('Error en la línea 63 de sale.service.ts', err);
     }
   }
 

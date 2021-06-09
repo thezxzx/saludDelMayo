@@ -34,6 +34,11 @@
           <ion-icon slot="start" name="person-outline"></ion-icon>
           <ion-label>Proveedores</ion-label>
         </ion-item>
+        <!-- Opción de descargar ventas hoy ( solo administrador ) -->
+        <ion-item *ngIf="userRole === 'Administrador'" (click)="getData()">
+          <ion-icon slot="start" name="clipboard-outline"></ion-icon>
+          <a [href]="safeURL" target="_blank" [download]="fileName">Reporte hoy</a>
+        </ion-item>
   
         <ion-item-divider></ion-item-divider>
         
