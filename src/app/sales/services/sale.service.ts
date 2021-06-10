@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { Products } from '../../products/interface/products-interface';
 import { ProductsService } from '../../products/services/products.service';
@@ -14,6 +13,11 @@ export class SaleService {
 
   salesCollection: AngularFirestoreCollection;
   sales: Observable<Products[]>;
+
+  tableSels = [];
+  searchedProducts: Products[] = [];
+
+  total: number = 0;
 
   constructor(
     private productsService: ProductsService,
@@ -60,7 +64,7 @@ export class SaleService {
       await this.af.collection('sales').add( products );
       
     } catch ( err ) {
-      console.log('Error en la línea 63 de sale.service.ts', err);
+      console.log('Error en la línea 62 de sale.service.ts', err);
     }
   }
 

@@ -42,7 +42,7 @@
               <h6> Cantidad </h6>
             </ion-col>
           </ion-row> <!-- Fin de los encabezados-->
-          <ion-row *ngFor="let product of searchedProducts; let i = index">
+          <ion-row *ngFor="let product of  saleService.searchedProducts; let i = index">
             <!-- Fila a repetir -->
             <ion-col size="3" class="ion-text-center">
               <p>{{ product.barCode }}</p>

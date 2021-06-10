@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { SalePageRoutingModule } from './sale-routing.module';
 
 import { SalePage } from './sale.page';
+import { ModalFindProductComponent } from '../../components/modal-find-product/modal-find-product.component';
+import { ProductFilterPipe } from '../../pipes/product-filter.pipe';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { SalePage } from './sale.page';
     SalePageRoutingModule
   ],
   declarations: [
-    SalePage
+    SalePage,
+    ModalFindProductComponent,
+    ProductFilterPipe
   ]
 })
 export class SalePageModule {}

@@ -86,6 +86,7 @@ export class SideMenuComponent implements OnInit {
       }
     }
 
+    this.total = 0;
     sales.forEach(sale => {
       this.total += sale.Total;
     })
@@ -119,7 +120,7 @@ export class SideMenuComponent implements OnInit {
       str += line + '\r\n';
     }
     str += '\r\n';
-    str += `\t\t\tTotal\t${ this.total }`,
+    str += ','+','+','+'Total'+','+this.total;
     console.log( str ); 
     return str;
   }
