@@ -1,8 +1,24 @@
 import { app } from "electron";
 import { createCapacitorElectronApp } from "@capacitor-community/electron";
+import * as path from 'path';
 
 // The MainWindow object can be accessed via myCapacitorApp.getMainWindow()
-const myCapacitorApp = createCapacitorElectronApp();
+const myCapacitorApp = createCapacitorElectronApp({
+  splashScreen: {
+    useSplashScreen: true,
+    splashOptions: {
+      imageFilePath: path.join( app.getAppPath(), 'assets', 'Salud_del_Mayo_Logo.png' )
+    }
+  },
+  trayMenu: {
+    useTrayMenu: false
+  },
+  mainWindow: {
+    windowOptions: {
+      autoHideMenuBar: true
+    }
+  }
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

@@ -69,8 +69,6 @@ export class ProductsPage implements OnInit {
   });
   
   ngOnInit(): void {
-
-
     // Evita que el menú se abra arrastrando
     this.menu.swipeGesture( false, 'first');
   }

@@ -64,7 +64,7 @@ export class SaleService {
       await this.af.collection('sales').add( products );
       
     } catch ( err ) {
-      console.log('Error en la línea 62 de sale.service.ts', err);
+      console.log('Error en la línea 67 de sale.service.ts', err);
     }
   }
 

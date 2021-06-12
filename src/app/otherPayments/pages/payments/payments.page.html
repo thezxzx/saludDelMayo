@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onToggleMenu()">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="downloadReport()">
+        <ion-icon slot="start" name="cloud-download-outline"></ion-icon>
+        <a [href]="safeURL" target="_blank" [download]="fileName">Descargar</a>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row *ngFor="let item of tableLength; let i = index;">
+      <ion-col size="5">
+        <ion-item>
+          <ion-textarea placeholder="Descripción" [(ngModel)]="item.description"></ion-textarea>
+        </ion-item>
+      </ion-col>
+      <ion-col size="5">
+        <ion-item>
+          <ion-input type="number" placeholder="Precio" [(ngModel)]="item.price" min="1" pattern="^(0*[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*)$"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button color="danger" (click)="removeItem( i )">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" class="flex">
+        <ion-button (click)="tableLengthPlusOne()">
+          <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+        <ion-button (click)="onSubmit()">
+          <ion-icon slot="start" name="add"></ion-icon>
+          Guardar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

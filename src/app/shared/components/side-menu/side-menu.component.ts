@@ -92,7 +92,8 @@ export class SideMenuComponent implements OnInit {
     })
     console.log(sales);
     const JSONObject = JSON.stringify(sales);
-    const fileName = 'Ventas del ' + new Date().toLocaleDateString()
+    const fileName = 'Ventas del ' + new Date().toLocaleDateString();
+    this.fileName = fileName;
     this.downloadFile(JSONObject, fileName);
   }
 

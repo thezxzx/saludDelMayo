@@ -37,10 +37,14 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'payments',
+    loadChildren: () => import('./otherPayments/pages/payments/payments.module').then( m => m.PaymentsPageModule)
+  },
+  {
     path: '**',
-    redirectTo: 'sale',
+    redirectTo: 'home',
     pathMatch: 'full'
-  }
+  },
 ];
 
 @NgModule({
